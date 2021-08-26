@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar de localStorage</title>
+</head>
+
+<body>
+    <a href="index.html">ir a Guardar Datos</a><br><br>
+
+    <button onclick="recuperarDatos()">Recuperar datos</button>
+
+    <p id="datos"></p>
+
+
+    <script>
+        function recuperarDatos() {
+
+            //Primero verifico si hay algo guardado con ese nombre
+            if (localStorage.getItem("mis_datos")) {
+
+                //.getItem() recibe por parametro el nombre (key) de un ítem y devuelve su contenido:
+                mis_datos_json = localStorage.getItem("mis_datos");
+
+                //Como lo que me devuelve es el json que guardé, lo transformo a objeto con .parse():
+                mis_datos = JSON.parse(mis_datos_json);
+
+                //Ya tengo el objeto, y lo muestro en pantalla con DOM:
+                document.getElementById("datos").innerHTML =
+                    "Dato 1: " + mis_datos.dato1 + "<br>" +
+                    "Dato 2: " + mis_datos.dato2 + "<br>" +
+                    "Dato 3: " + mis_datos.dato3 + "<br>";
+
+            }else{
+                document.getElementById("datos").innerHTML = "No hay datos almacenados";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

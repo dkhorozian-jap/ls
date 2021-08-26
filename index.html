@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Guardar en localStorage</title>
+</head>
+<body>
+    <a href="recuperar_datos.html">ir a ver los Datos Guardados</a><br><br>
+
+    <label for="dato1">dato 1:</label>
+    <input type="text" id="dato1" /><br>
+
+    <label for="dato2">dato 2:</label>
+    <input type="text" id="dato2" /><br>
+
+    <label for="dato3">dato 3:</label>
+    <input type="text" id="dato3" /><br>
+    <br>
+
+    <button onclick="guardarDatos()">Guardar datos</button>
+
+    <script>
+        function guardarDatos() {
+
+            //Creo un objeto que contega los datos a guardar:
+            let mis_datos = {
+                dato1: document.getElementById("dato1").value, 
+                dato2: document.getElementById("dato2").value, 
+                dato3: document.getElementById("dato3").value
+            };
+
+            //Como necesito tener un string, en lugar de un objeto para guardarlo en localStorage, lo transformaré a JSON
+            //Lo hago utilizando el método stringify() del objeto JSON, que recibe un objeto y lo devuelve como JSON:
+            let mis_datos_json = JSON.stringify(mis_datos);
+
+            //Por último, utilizo el método setItem() del objeto localStorage para almacenar el JSON a nivel local
+            //Recibe 2 parametros: el primero será un string con el nombre que le pondremos al objeto (key)
+            //y el segundo será el contenido. En este caso, en formato json.
+            localStorage.setItem("mis_datos", mis_datos_json);
+        }
+    </script>
+</body>
+</html>
+
+<!--
+
+*Diferencias entre localStorage y sessionStorage:
+
+-los datos almacenados en localStorage no expiran
+-los datos almacenados en sessionStorage son eliminados cuando finaliza la sesión (cuando se cierra la página)
+
+-los datos almacenados en localStorage persisten entre ventanas con el mismo origen
+-los datos almacenados en sessionStorage persisten sólo en la ventanas que los creó
+
+
+*Principales métodos de localStorage y sessionStorage:
+
+.setItem(clave, valor) – almacena un par clave/valor.
+.getItem(clave) – obtiene el valor por medio de la clave.
+.removeItem(clave) – elimina la clave y su valor.
+.clear() – borra todo.
+.key(índice) – obtiene la clave de una posición dada.
+.length – devuelve el número de ítems almacenados.
+
+-->
